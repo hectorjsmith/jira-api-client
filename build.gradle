@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'org.hsmith'
-version '0.1.0'
+version "git describe --tags".execute().text.trim()
 description "Library to integrate with Jira using Jira REST APIs"
 
 repositories {
