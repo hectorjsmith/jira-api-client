@@ -1,10 +1,10 @@
 package org.hsmith.jira_api_client.api
 
-import java.util.concurrent.TimeUnit
 import org.hsmith.jira_api_client.adapters.UriAdapter
 import org.hsmith.jira_api_client.auth.JiraCredentials
 import org.openapitools.client.infrastructure.ApiClient
 import org.openapitools.client.infrastructure.Serializer
+import java.util.concurrent.TimeUnit
 
 class JiraRestApi(private val jiraUri: String, jiraCredentials: JiraCredentials) : JiraApi {
     init {
