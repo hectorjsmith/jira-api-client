@@ -1,7 +1,7 @@
 package org.hsmith.jira_api_client.data.input.builder
 
-import java.time.LocalDateTime
 import org.hsmith.jira_api_client.data.input.JiraInputIssueData
+import java.time.LocalDateTime
 
 interface JiraInputIssueDataBuilder {
     fun setAffectedVersionsNames(affectedVersionNames: Set<String>): JiraInputIssueDataBuilder

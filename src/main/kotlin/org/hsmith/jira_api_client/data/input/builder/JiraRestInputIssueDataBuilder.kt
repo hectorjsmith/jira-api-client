@@ -1,9 +1,9 @@
 package org.hsmith.jira_api_client.data.input.builder
 
-import java.time.LocalDateTime
 import org.hsmith.jira_api_client.data.input.JiraFieldInput
 import org.hsmith.jira_api_client.data.input.JiraInputIssueData
 import org.hsmith.jira_api_client.data.input.JiraIssueFieldId
+import java.time.LocalDateTime
 
 open class JiraRestInputIssueDataBuilder(
     private val projectKey: String,
@@ -106,8 +106,10 @@ open class JiraRestInputIssueDataBuilder(
         validateExtensionClass()
         val missingFields = findMissingRequiredFields()
         if (missingFields.isNotEmpty()) {
-            throw IllegalArgumentException("Cannot build story data, fields missing: %s"
-                .format(missingFields.joinToString(", ") { it }))
+            throw IllegalArgumentException(
+                "Cannot build story data, fields missing: %s"
+                    .format(missingFields.joinToString(", ") { it })
+            )
         }
     }
 

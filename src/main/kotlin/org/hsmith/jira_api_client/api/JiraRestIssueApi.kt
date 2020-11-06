@@ -1,11 +1,11 @@
 package org.hsmith.jira_api_client.api
 
-import java.lang.Exception
 import org.hsmith.jira_api_client.data.input.JiraInputIssueData
 import org.hsmith.jira_api_client.data.output.JiraCreatedIssueData
 import org.openapitools.client.apis.IssuesApi
 import org.openapitools.client.models.CreatedIssue
 import org.slf4j.LoggerFactory
+import java.lang.Exception
 
 class JiraRestIssueApi internal constructor(jiraUri: String) : JiraIssueApi {
     private val logger by lazy { LoggerFactory.getLogger(this::class.java) }
@@ -19,15 +19,19 @@ class JiraRestIssueApi internal constructor(jiraUri: String) : JiraIssueApi {
                 rawApiClient.comAtlassianJiraRestV2IssueIssueResourceCreateIssuePost(mapForJira, updateHistory)
             return mapCreatedIssueToJiraCreatedIssueData(createdIssue)
         } catch (ex: Exception) {
-            logger.error("Failed to create Jira issue: ${inputData.summary}. Raw data:\n%s"
-                .format(mapForJira.toString()))
+            logger.error(
+                "Failed to create Jira issue: ${inputData.summary}. Raw data:\n%s"
+                    .format(mapForJira.toString())
+            )
             throw ex
         }
     }
 
     override fun createIssuesInBulk(inputData: Set<JiraInputIssueData>): Set<JiraCreatedIssueData> {
-        logger.debug("Creating %d issues: [%s]"
-            .format(inputData.size, inputData.joinToString(", ") { it.summary }))
+        logger.debug(
+            "Creating %d issues: [%s]"
+                .format(inputData.size, inputData.joinToString(", ") { it.summary })
+        )
 
         val dataMapsForJira = inputData.map { wrapIssueDataInMapForJira(it) }.toSet()
         val mapForJira = mapOf(Pair("issueUpdates", dataMapsForJira))
