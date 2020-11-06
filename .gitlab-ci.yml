@@ -2,7 +2,7 @@ image: java:8-jdk
 
 stages:
   - test
-  - compile
+  - package
 
 before_script:
   #  - echo `pwd` # debug
@@ -10,11 +10,6 @@ before_script:
   - export GRADLE_USER_HOME=`pwd`/.gradle
   - chmod +x gradlew
   - git fetch --tags
-
-cache:
-  paths:
-    - .gradle/wrapper
-    - .gradle/caches
 
 ktlint:
   stage: test
@@ -32,13 +27,18 @@ test:
     - ./gradlew test --stacktrace
 
 compile:
-  stage: compile
+  stage: package
   script:
     - ./gradlew build
   artifacts:
     paths:
       - build/libs/*.jar
     expire_in: 1 day
+
+publish:
+  stage: package
+  script:
+    - ./gradlew publish
 
 after_script:
   - echo "End CI"
