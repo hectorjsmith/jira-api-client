@@ -2,7 +2,7 @@ image: java:8-jdk
 
 stages:
   - test
-  - compile
+  - package
 
 before_script:
   #  - echo `pwd` # debug
@@ -27,7 +27,7 @@ test:
     - ./gradlew test --stacktrace
 
 compile:
-  stage: compile
+  stage: package
   script:
     - ./gradlew build
   artifacts:
